@@ -19,7 +19,7 @@ And this repository definition at the end of your *pom.xml*:
 
  ```xml
  <repositories>
-     <!-- GitHub Repository -->
+     <!-- librAIry Multi-Word Annotator Repository -->
      <repository>
          <id>librairy-multi-word-annotator</id>
          <url>https://raw.github.com/librairy/multi-word-annotator/mvn-repo/</url>
