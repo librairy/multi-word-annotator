@@ -1,0 +1,91 @@
+<html>
+<head></head>
+<body>
+JSemcor was designed to be an easy-to-use, easy-to-extend Java library for 
+interfacing with the Semcor electronic concordance.  It features API calls 
+to retrieve context objects, paragraphs, sentences and tokens from the Semcor 
+data files.  It also has classes that allow the user to interface to the taglist 
+index files (if available) and the permit ‘detokenization’ of the texts back into 
+human-readable form. The library includes no GUI elements.
+<p>
+JSemcor supports all currently available versions of Semcor.  
+No version of Semcor is included with the JSemcor distribution; Semcor must be 
+downloaded separately from Rada Milhacea’s website at 
+<a href="http://www.cs.unt.edu/~rada/downloads.html">http://www.cs.unt.edu/~rada/downloads.html</a>.
+<p>
+The freely available version of JSemcor is licensed for use for 
+non-commercial purposes only, as long as proper acknowledgment is made.  
+Details can be found in the license, which is included with the distribution.  
+The copyright on the software is owned by MIT; if you wish to 
+use the software for commercial purposes, please contact the MIT Technology 
+Licensing Office for more information on how to obtain a commercial license.
+<p>
+The main interface for accessing concordance data is the {@link edu.mit.jsemcor.main.IConcordanceSet} 
+interface.  The distribution comes with 
+a single default implementation of this interface, 
+the {@link edu.mit.jsemcor.main.Semcor} class.  In the simplest case, where you are using 
+data files on the same filesystem as your Java program, 
+you can instantiate the {@link edu.mit.jsemcor.main.Semcor} class with a single argument, 
+a Java {@link java.net.URL} object that points to the directory where the Semcor concordance 
+data files are located.
+<p>
+An example of this can be found in below, in the form of a Java method 
+<tt>testSemcor()</tt>.  In that method, the first block of two lines (4-5) 
+deals with constructing a {@link java.net.URL} object that points to the Semcor data files.  
+The base Semcor directory is the directory that contains the subdirectories 
+<tt>brown1</tt>, <tt>brown2</tt>, and <tt>brownv</tt>.  In this example, it 
+is assumed that the Semcor zip file was unzipped to the location “C:\Semcor\”.  
+This may be different on your system depending on where you choose to put your 
+Semcor files.  The second block of code, two lines long (8-9), constructs an 
+instance of the default Semcor object, and opens it by calling the 
+<tt>open()</tt> method.  The next block of lines (12-14) retrieves the first 
+context file from the concordance by name, and retrieves the first sentence of 
+that context file by direct access.  Following that, lines 17-23 comprise a 
+simple for loop searches for the first wordform in that sentence that has an 
+assigned sense. Once that word form is found, some salient characteristics are 
+printed to the console on lines 26-28.  The text following the example code 
+shows the console output of the method.
+
+<p>
+Sample Code:
+<pre>
+1   public void testSemcor() throws IOException {
+2	
+3     // construct the URL to the Semcor directory
+4     String path = "C:/Semcor/";
+5     URL url = new URL("file", null, path);
+6
+7     // construct the semcor object and open it
+8     IConcordanceSet semcor = new Semcor(url);
+9     semcor.open();
+10
+11    // look up first sentence of first context
+12    IConcordance concord = semcor.get("brown1");
+13    IContext context = concord.getContext("br-a01");
+14    ISentence sentence = context.getSentences().get(0);
+15
+16    // find first word with non-null sense
+17    IWordform wordform = null;
+18    for(IWordform wf : sentence.getWordList()){
+19      if(wf.getSemanticTag() != null){
+20          wordform = wf;
+21          break;
+22      }
+23    }
+24
+25    // print it
+26    System.out.println("Text = " + wordform.getText());
+27    System.out.println("POS = " + wordform.getPOSTag().getValue());
+28    System.out.println("Sense Key = " + wordform.getSemanticTag().getSenseKeys().get(0));
+29  }
+</pre>
+<p>
+Sample Code Output:
+<pre>
+1  Text = Fulton County Grand Jury
+2  POS = NNP
+3  Sense Key = group%1:03:00::
+</pre>
+
+</body>
+</html>

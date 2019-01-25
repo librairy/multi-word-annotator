@@ -1,0 +1,30 @@
+<html>
+<head></head>
+<body>
+jMWE is a Java library for constructing and testing Multi-Word Expression detectors. A Multi-Word
+Expression (MWE) is a group of words that (1) occurs together more often than would be expected by pure
+chance and, (2) is arbitrarily restricted with regard to their syntactic or semantic 
+flexibility. Examples of
+common MWEs are compound nouns such as world record or verb-particle constructions such as look up, as,
+for example in the sentence:
+
+<ol>
+<li>She looked up the world record.</li>
+</ol>
+
+The library has three main facilities: (1) a detector API, (2) a MWE index facility, and (3) a test harness. The
+detector API defines a detector interface which provides a single method for detecting MWE tokens in a list
+of individual tokens; anyone interested in taking advantage of jMWEs testing infrastructure or writing their
+own MWE token detection algorithm need only implement this interface. jMWE provides several baseline
+MWE token detection strategies. Also provided are detector filters and resolvers, which apply a specific constraint to or
+resolve conflicts in the output another detector. The MWE index provides classes for constructing, storing,
+and accessing indices of valid MWE types. An MWE index allows an algorithm to retrieve a list of MWE
+types given a single word token and part of speech. The index also lists how frequently, in a particular
+concordance, a set of tokens appears as a particular MWE type rather than as independent words. The test
+harness allows one to run an MWE detector over a given corpus and measure its precision and recall. The
+library has no GUI elements.
+<p>
+jMWE is free to use for all purposes, as long as proper acknowledgment is made. 
+Details can be found in the license, which is included with the distribution.
+</body>
+</html>
