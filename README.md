@@ -11,7 +11,7 @@ Maven users will need to add the following dependency to their pom.xml for this 
 <dependency>
     <groupId>org.librairy</groupId>
     <artifactId>multi-word-annotator</artifactId>
-    <version>1.0</version>
+    <version>[1.0,)</version>
 </dependency>
 ```
 
