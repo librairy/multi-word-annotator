@@ -68,7 +68,7 @@ public class ConcordanceToken extends Token implements IConcordanceToken {
 	 * @since jMWE 1.0.0
 	 */
 	public ConcordanceToken(String text, String tag, int tokenNum, int partNum, String... stems) {
-		super(text, tag, stems);
+		super(text, tag, 0l, stems);
 		if(tokenNum < 0)
 			throw new IllegalArgumentException();
 		if(partNum < 0)

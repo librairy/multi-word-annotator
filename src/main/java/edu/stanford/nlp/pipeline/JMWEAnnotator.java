@@ -152,6 +152,8 @@ public class JMWEAnnotator implements Annotator {
     public List<IMWE<IToken>> getjMWEInSentence(CoreMap sentence, IMWEIndex index, IMWEDetector detector,
                                                 boolean verbose) {
         List<IToken> tokens = getITokens(sentence.get(CoreAnnotations.TokensAnnotation.class));
+
+
         List<IMWE<IToken>> mwes = detector.detect(tokens);
         if (verbose) {
             for (IMWE<IToken> token : mwes) {
@@ -227,7 +229,7 @@ public class JMWEAnnotator implements Annotator {
     public List<IToken> getITokens(List<CoreLabel> tokens, String underscoreReplacement) {
         List<IToken> sentence = new ArrayList<IToken>();
         for (CoreLabel token : tokens) {
-            sentence.add(new Token(token.originalText().replaceAll("_", underscoreReplacement), token.get(PartOfSpeechAnnotation.class), token.lemma().replaceAll("_", underscoreReplacement)));
+            sentence.add(new Token(token.originalText().replaceAll("_", underscoreReplacement), token.get(PartOfSpeechAnnotation.class), Long.valueOf(token.get(CoreAnnotations.CharacterOffsetBeginAnnotation.class)), token.lemma().replaceAll("_", underscoreReplacement)));
         }
         return sentence;
     }

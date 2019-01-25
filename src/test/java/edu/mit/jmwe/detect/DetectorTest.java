@@ -39,13 +39,13 @@ public class DetectorTest {
         // construct a test sentence:
         // "She looked up the world record."
         List<IToken > sentence = new ArrayList<IToken >();
-        sentence.add(new Token("She", "DT"));
-        sentence.add(new Token("looked", "VBT", "look"));
-        sentence.add(new Token("up", "RP"));
-        sentence.add(new Token("the", "DT"));
-        sentence.add(new Token("world", "NN"));
-        sentence.add(new Token("record", "NN"));
-        sentence.add(new Token(".", "."));
+        sentence.add(new Token("She", "DT", 0l));
+        sentence.add(new Token("looked", "VBT", 1l, "look"));
+        sentence.add(new Token("up", "RP", 2l));
+        sentence.add(new Token("the", "DT", 3l));
+        sentence.add(new Token("world", "NN", 4l));
+        sentence.add(new Token("record", "NN", 5l));
+        sentence.add(new Token(".", ".", 6l));
 
         // run detector and print out results
         List<IMWE<IToken>> mwes = detector.detect(sentence);

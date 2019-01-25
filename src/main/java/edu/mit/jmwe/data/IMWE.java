@@ -74,4 +74,6 @@ public interface IMWE<T extends IToken> extends IHasForm {
 	 */
 	public boolean isInflected();
 
+	public Long getOffset();
+
 }

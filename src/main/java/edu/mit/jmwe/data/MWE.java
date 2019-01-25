@@ -40,6 +40,8 @@ public class MWE<T extends IToken> implements IMWE<T>{
 	private final List<T> tokens;
 	private final boolean isInflected;
 	private final Map<T, IPart> partMap;
+
+	private Long offset;
 	
 	/**
 	 * Constructs a new multi-word expression from a map of tokens to parts.
@@ -143,6 +145,10 @@ public class MWE<T extends IToken> implements IMWE<T>{
 		this.isInflected = isInflected;
 		this.tokens = Collections.unmodifiableList(ts);
 		this.partMap = Collections.unmodifiableMap(partMap);
+
+
+		this.offset = partMap.keySet().stream().map(t -> (Token) t).map(token -> token.getOffset()).reduce((a,b) -> a<b? a : b).get();
+
 	}
 	
 	/* 
@@ -190,11 +196,16 @@ public class MWE<T extends IToken> implements IMWE<T>{
 		return isInflected;
 	}
 
-	/* 
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
+	@Override
+	public Long getOffset() {
+		return offset;
+	}
+
+	/*
+         * (non-Javadoc)
+         *
+         * @see java.lang.Object#toString()
+         */
 	@Override
 	public String toString(){
 		StringBuilder buf = new StringBuilder();

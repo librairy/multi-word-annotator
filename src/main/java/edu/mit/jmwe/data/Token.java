@@ -26,6 +26,7 @@ public class Token implements IToken {
 	// final instance fields
 	private final String tag, text;
 	private final List<String> stems;
+	private final Long offset;
 
 	/**
 	 * Constructs a new token object with the specified text and tag,
@@ -44,8 +45,8 @@ public class Token implements IToken {
 	 *             if the trimmed text is empty or contains whitespace
 	 * @since jMWE 1.0.0
 	 */
-	public Token(String text, String tag){
-		this(text, tag, (String[])null);
+	public Token(String text, String tag, Long offset){
+		this(text, tag, offset, (String[])null);
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class Token implements IToken {
 	 *             if the trimmed text is empty or contains whitespace
 	 * @since jMWE 1.0.0
 	 */
-	public Token(String text, String tag, String... stems){
+	public Token(String text, String tag, Long offset, String... stems){
 		
 		// check arguments
 		text = checkString(text);
@@ -78,6 +79,7 @@ public class Token implements IToken {
 		this.text = text;
 		this.tag = tag;
 		this.stems = stemList;
+		this.offset = offset;
 	}
 	
 	/* 
@@ -106,12 +108,16 @@ public class Token implements IToken {
 	public List<String> getStems() {
 		return stems;
 	}
-	
-	/* 
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
+
+	public Long getOffset() {
+		return offset;
+	}
+
+	/*
+         * (non-Javadoc)
+         *
+         * @see java.lang.Object#toString()
+         */
 	public String toString(){
 		return text + "_" + tag;
 	}

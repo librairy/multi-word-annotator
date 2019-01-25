@@ -29,7 +29,7 @@ public class JMWEAnnotatorTest {
 
         String index    = new File("src/test/resources/mweindex_wordnet3.0_Semcor1.6.data").getAbsolutePath();
 
-        String text     = "She looked up the world record.";
+        String text     = "She looked up the world record and looked up again.";
 
         // creates the properties for Stanford CoreNLP: tokenize, ssplit, pos, lemma, jmwe
         Properties props = new Properties();
@@ -54,7 +54,7 @@ public class JMWEAnnotatorTest {
             System.out.println("Sentence: "+sentence);
             // loop over all discovered jMWE token and perform some action
             for (IMWE<IToken> token: sentence.get(JMWEAnnotator.JMWEAnnotation.class)) {
-                System.out.println("IMWE<IToken>: "+token+", token.isInflected(): "+token.isInflected()+", token.getForm(): "+token.getForm());
+                System.out.println("IMWE<IToken>: "+token+", token.isInflected(): "+token.isInflected()+", token.getForm(): "+token.getForm() + " -> " + token.getOffset());
             }
             System.out.println();
         }

@@ -48,4 +48,6 @@ public interface IToken extends IHasForm {
 	 */
 	public List<String> getStems();
 
+	public Long getOffset();
+
 }
